@@ -1,0 +1,45 @@
+Problem 1 – Game Shopping
+
+Imagine your character is going on a quest to acquire game-related items
+from a virtual marketplace.
+
+Using top-down design, break down the process of acquiring these items
+into smaller tasks.
+
+Start with the overall goal and identify the major tasks needed to
+complete it. Then, break each major task into smaller subtasks.
+
+Continue breaking down the tasks until each step is simple and easy
+to understand.
+
+Your solution should clearly show the different levels of the
+top-down design.
+
+
+1. Determine What Items Are needed (big task)
+    1.1 Review character's current inventory and attributes
+    1.2 Identify items needed for upgrading character
+    1.3 Determine available budget (do I have enugh money?)
+
+2. Search the Virtual Marketplace (big task)
+    2.1 Open the marketplace (or go to game marketplace)
+    2.2 Select an item category
+    2.3 Compare available items
+
+3. Select Items (big task)
+    3.1 Check item price (smaller task, affordable?)
+    3.2 Check attributes (better or worst)
+    3.3 Does it fit the character? (role based equipment)
+    3.4 Add it to the cart
+
+4. Purchase Item(s) (big task)
+    4.1 Go to shopping cart
+    4.2 Find possible discounts (if applicable)
+    4.3 Verify the total cost
+    4.4 Check total (have enough mola/money/dinero/cashing/cash)
+    4.5 Proceed to pay (buy)
+
+5. Verify Purchase (big task)
+    5.1 Review confirmation of purchase
+    5.2 Open character's inventory to check that item has been added
+    

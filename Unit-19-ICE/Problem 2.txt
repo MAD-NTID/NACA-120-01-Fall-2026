@@ -1,0 +1,63 @@
+Problem 2 – Ordering a Pizza
+
+Use top-down design to break down the process of ordering a pizza online.
+
+Start with the overall goal:
+
+    Order a Pizza Online
+
+Identify the major tasks required to complete the process, such as:
+
+- Selecting a pizza
+- Choosing toppings
+- Providing a delivery address
+- Making payment
+
+Break each major task into smaller subtasks.
+
+Continue breaking down the tasks until each step is simple and easy
+to understand.
+
+Your solution should clearly show the different levels of the
+top-down design.
+
+
+1. Selecting a Pizza - Determine ordering type of pizza (menu selection) (big task)
+    1.1 Type of pizza available
+    1.2 Select pizza category
+    1.3 Compare prices of pizzas
+    1.4 Select pizza and size and crust
+    1.5 Select sauce, type of cheese, main ingredients
+
+2. Choose toppings
+    2.1 Type of toppings available
+    2.2 Select pizza toppings (extra toppings if needed)
+    2.3 Remove unwanted toppings
+    2.4 Compare prices of toppings (extras)
+    2.5 Confirm pizza selection
+
+3. Pick up or Delivery?
+    3a. Pick up
+        3a.1 - Select nearest store
+        3a.2 - Estimate time for pick up
+        3a.3 - Pick up Person Name and maybe phone # or order #
+        3a.4 - Tip amount (optional)
+
+    3b. Delivery
+        3b.1 - Delivery cost (are you broke?)
+        3b.2 - Select nearest store
+        3b.3 - Estimate delivery 
+        3b.4 - Tip amount (optional)
+        3b.5 - Enter customer address
+        3b.6 - Delivery instructions
+
+4. Make Payment
+    4.1 Review order and total cost
+    4.2 Select payment method (credit card, debit, gift card, etc)
+    4.3 Enter payment information
+    4.4 Submit payment
+
+5. Confirm Order
+    5.1 Check email/text for receipt
+    5.2 Verify confirmation 
+    5.3 Check order status (estimated time/delivery)

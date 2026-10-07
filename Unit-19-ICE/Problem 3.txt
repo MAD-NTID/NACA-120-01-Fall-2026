@@ -1,0 +1,23 @@
+Problem 3 – Area of a Circle Function
+
+Write a pseudocode function named:
+
+    calculate_circle_area
+
+The function must:
+
+1. Accept the radius of a circle as a parameter.
+2. Calculate the area of the circle.
+3. Return the calculated area.
+
+Use the following formula:
+
+    area = π × radius²
+
+Your solution must be written as a pseudocode function.
+
+
+function calculate_circle_area(radius)
+    area = π × radius²
+    return area
+end function 

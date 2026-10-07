@@ -1,0 +1,61 @@
+Problem 4 – Temperature Conversion Function
+
+Write a pseudocode function named:
+
+    convert_temperature
+
+The function must accept two parameters:
+
+    degrees
+    unit
+
+The unit parameter indicates the current temperature unit:
+
+    "C" = Celsius
+    "F" = Fahrenheit
+
+If the unit is "C", convert the temperature from Celsius to Fahrenheit.
+
+Use:
+
+    F = (9 / 5 × C) + 32
+
+If the unit is "F", convert the temperature from Fahrenheit to Celsius.
+
+Use:
+
+    C = (F - 32) × 5 / 9
+
+The function must return the converted temperature.
+
+Your solution must be written as a pseudocode function.
+
+
+Pseudocode:
+function convert_temperature(degrees, unit)
+    //  if "C" for celsius, convert to Fahrenheit
+    if unit == "C"
+        result = (9 / 5 × C) + 32
+
+    //  if "F" for fahrenheit, convert to Celsius
+    else if unit == "F"
+        result = (F - 32) × 5 / 9
+
+    end if
+
+    //  how can the function know which conversion to return F or C???
+    return result
+end function 
+
+another way - a bit shorter and simple -
+function convert_temperature(degrees, unit)
+    //  if "C" for celsius, convert to Fahrenheit
+    if unit == "C"
+        return (9 / 5 × C) + 32
+
+    //  if "F" for fahrenheit, convert to Celsius
+    else if unit == "F"
+        return (F - 32) × 5 / 9
+
+    end if
+end function 
