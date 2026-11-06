@@ -4,10 +4,10 @@
 
 # Global list of tuples
 # Each tuple: (make, model, color, year, owner)
-cars = [
-    ("Toyota", "Camry", "Silver", 2022, "John"),
-    ("Honda", "Civic", "Blue", 2020, "Mary"),
-    ("Ford", "Mustang", "Red", 2024, "David")
+car_lot = [
+    ("Toyota", "Tacoma", "Red", 2021, "Isaiah"),
+    ("Tesla", "Model S", "Silver", 2026, "Arturo"),
+    ("Honda", "Odyssey", "Blue", 2004, "Juaño")
 ]
 
 
@@ -23,27 +23,77 @@ def show_menu():
 
 
 def view_cars():
-    pass
+    for car in car_lot:
+        print(car)
 
 
-def access_tuple():
-    pass
+def access_tuple(index = 0):
+    if len(car_lot) > 0 and index <= len(car_lot):
+        car = car_lot[index]
+        print(car)
+        print(  f"Individual Details: " \
+                f"\n\tMake: {car[0]}" \
+                f"\n\tModel: {car[1]}" \
+                f"\n\tColor: {car[2]}" \
+                f"\n\tYear: {car[3]}" \
+                f"\n\tOwner: {car[4]}")
+    else:
+        print("Car not found")
+
 
 
 def add_car():
-    pass
+    make = input("Enter make: ")
+    model = input("Enter model: ")
+    color = input("Enter color: ")
+
+    try:
+        year = int(input("Enter year: "))
+    except ValueError:
+        year = 0
+    
+    owner = input("Enter owner: ")
+
+    car_lot.append((make, model, color, year, owner))
 
 
-def search_car():
-    pass
+def search_car_by_owner():
+    owner = input("Enter the owner name: ").lower()
+
+    for index in range(len(car_lot)):
+        car = car_lot[index]
+
+        #                   0       1   2       3       4
+        # car is a tuple: (make, model, color, year, owner)
+        if car[4].lower() == owner:
+            return owner
+
+    return None
 
 
-def change_color():
-    pass
+def change_color(owner):
+    for index in range(len(car_lot)):
+        car = car_lot[index]
+
+        #                   0       1   2       3       4
+        # car is a tuple: (make, model, color, year, owner)
+        if car[4].lower() == owner:
+            print(f"Current color is: {car[2]}")
+
+            new_color = input("Enter new color: ")
+
+            # Tuple is immutable so create a new one and copy the old values
+            car_lot[index] = (car[0], car[1], new_color, car[3], car[4])
+            break
 
 
 def remove_car():
-    pass
+    view_cars()
+
+    index = int(input(f"Pick a car to remove (1 - {len(car_lot)}): "))
+
+    if index >= 1 and index <= len(car_lot):
+        print(f"Removed: {car_lot.pop(index - 1)}")
 
 
 def main():
@@ -56,16 +106,35 @@ def main():
             view_cars()
 
         elif choice == "2":
-            access_tuple()
+            view_cars()
+            print()
+
+            index = int(input("Pick a car to show details: "))
+
+            access_tuple(index)
 
         elif choice == "3":
             add_car()
 
+            print(f"Car Added - ")
+            
+            # Show the last car
+            access_tuple(-1)
+
         elif choice == "4":
-            search_car()
+            owner = search_car_by_owner()
+            
+            if owner is None:
+                print(f"Cars not found for owner")
 
         elif choice == "5":
-            change_color()
+            view_cars()
+
+            owner = input("Enter the owner name: ").lower()
+
+            change_color(owner)
+
+            view_cars()
 
         elif choice == "6":
             remove_car()
