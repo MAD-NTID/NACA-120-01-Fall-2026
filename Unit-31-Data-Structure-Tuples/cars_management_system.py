@@ -23,23 +23,19 @@ def show_menu():
 
 
 def view_cars():
-    for car in car_lot:
-        print(car)
+    if len(car_lot) == 0:
+        print("No cars to show")
+
+    for i in range(len(car_lot)):
+        car = car_lot[i]
+        print(f"{i} - {car}")
 
 
 def access_tuple(index = 0):
-    if len(car_lot) > 0 and index <= len(car_lot):
-        car = car_lot[index]
-        print(car)
-        print(  f"Individual Details: " \
-                f"\n\tMake: {car[0]}" \
-                f"\n\tModel: {car[1]}" \
-                f"\n\tColor: {car[2]}" \
-                f"\n\tYear: {car[3]}" \
-                f"\n\tOwner: {car[4]}")
-    else:
-        print("Car not found")
+    if 0 <= index < len(car_lot):
+        return car_lot[index]
 
+    return None
 
 
 def add_car():
@@ -66,34 +62,31 @@ def search_car_by_owner():
         #                   0       1   2       3       4
         # car is a tuple: (make, model, color, year, owner)
         if car[4].lower() == owner:
-            return owner
+            return (car, owner)
 
-    return None
-
-
-def change_color(owner):
-    for index in range(len(car_lot)):
-        car = car_lot[index]
-
-        #                   0       1   2       3       4
-        # car is a tuple: (make, model, color, year, owner)
-        if car[4].lower() == owner:
-            print(f"Current color is: {car[2]}")
-
-            new_color = input("Enter new color: ")
-
-            # Tuple is immutable so create a new one and copy the old values
-            car_lot[index] = (car[0], car[1], new_color, car[3], car[4])
-            break
+    return ((), owner)
 
 
-def remove_car():
-    view_cars()
+def change_color(index, color):
+    # Get the car tuple at whatever index user chooses
+    car = car_lot[index]
 
-    index = int(input(f"Pick a car to remove (1 - {len(car_lot)}): "))
+    if len(car) == 5:
+        # Unpack the tuple (car)
+        # Python has discard temporary varible _
+        make, model, _, year, owner = car
 
-    if index >= 1 and index <= len(car_lot):
-        print(f"Removed: {car_lot.pop(index - 1)}")
+        # Create the new car with the new color (copy old values)
+        new_car = (make, model, color, year, owner)
+
+        # Update the index where old car was with the new one
+        car_lot[index] = new_car
+
+    return car
+
+
+def remove_car(index):
+    return car_lot.pop(index)
 
 
 def main():
@@ -111,7 +104,23 @@ def main():
 
             index = int(input("Pick a car to show details: "))
 
-            access_tuple(index)
+            car = access_tuple(index)
+
+            if car is not None:
+                # tuple unpacking
+                # Each tuple: (make, model, year, color, owner)
+                make, model, year, color, owner = car
+
+                print(  f"Individual Details: " \
+                    f"\n\tMake: {make}" \
+                    f"\n\tModel: {model}" \
+                    f"\n\tColor: {year}" \
+                    f"\n\tYear: {color}" \
+                    f"\n\tOwner: {owner}")
+
+            else:
+                print(f"Car not found for index {index}")
+
 
         elif choice == "3":
             add_car()
@@ -122,22 +131,76 @@ def main():
             access_tuple(-1)
 
         elif choice == "4":
-            owner = search_car_by_owner()
-            
-            if owner is None:
-                print(f"Cars not found for owner")
+            # Unpack the returned tuple
+            car, owner = search_car_by_owner()
+
+            if len(car) == 5:
+                make, model, year, color, owner = car
+
+                print(  f"Individual Details: " \
+                    f"\n\tMake: {make}" \
+                    f"\n\tModel: {model}" \
+                    f"\n\tColor: {year}" \
+                    f"\n\tYear: {color}" \
+                    f"\n\tOwner: {owner}")
+
+            else:
+                print(f"Car not found for owner {owner}")
+
 
         elif choice == "5":
-            view_cars()
+            # We use this index for validating car found
+            index = -1
 
-            owner = input("Enter the owner name: ").lower()
+            # This loop is to get a valid car that exists in the lot
+            while True:
+                view_cars()
 
-            change_color(owner)
+                try:
+                    index = int(input("Enter the Index of the Car to change color: "))
 
-            view_cars()
+                    # Validate index is valid between 0 and < car_lot length
+                    if index >= 0 and index < len(car_lot):
+                        break
+
+                    print(f"Invalid Index. Please enter a number between 0 and {len(car_lot) - 1}")
+                except ValueError:
+                    print("Invalid Input. Please enter a valid index")
+                    continue
+
+            # Get the Old Color
+            old_color = car_lot[index][2]
+
+            # This loop is to ensure we get a color
+            while True:
+                new_color = input("Enter the new color (red, blue, yellow, white): ").lower()
+
+                # If you really want to validate colors you can do something like this
+                real_colors = ("red", "blue", "yellow", "white")
+
+                if not new_color or new_color not in real_colors:
+                    print("Color cannot be empty or is not a valid color")
+                    continue
+
+                break
+
+            change_color(index, new_color)
+
+            print(f"Color changed from {old_color} to new {new_color}")
 
         elif choice == "6":
-            remove_car()
+            while True:
+                index = int(input(f"Pick a car to remove (0 - {len(car_lot) - 1}): "))
+                
+                if index >= 0 and index < len(car_lot):
+                    removed_car = remove_car(index)
+                    print(f"Removed: {removed_car}")
+                    break
+                else:
+                    print(f"Invalid Car Index. Enter between 0 and {len(car_lot) - 1}")
+
+            if removed_car is None:
+                print(f"Car could not be removed")
 
         elif choice == "7":
             print("\nGoodbye!")
