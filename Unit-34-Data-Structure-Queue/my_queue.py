@@ -29,3 +29,14 @@ def empty():
     If List (length) Size is 0 then it's True (empty), otherwise, False (not empty)
     """
     return size() <= 0
+
+def main():
+    """
+    This main function will not run when imported to another python file that is running as main()
+    This separates the responsibility of the file. We can use it as module in another python running main()
+    """
+    enqueue("Mary")
+    print("Mary was enqueued")  
+
+if __name__ == "__main__":
+    main()
